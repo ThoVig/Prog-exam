@@ -1,10 +1,14 @@
+// https://stackoverflow.com/questions/54217682/building-a-calculator-using-p5-js
+// https://stackoverflow.com/questions/61747298/make-a-calculator-in-p5
+// https://stackoverflow.com/questions/61757326/making-a-calculator-function-properly-in-p5-js
 var mouseClick = false;
 
-var numbers = [];
 
+var displayNumArray = [];  //gloab array er nødvendig for at få tal fra flere objecter
+var operation;
 
-
-
+var displayNum = "";
+var wholeNum;
 
 
 function setup() 
@@ -27,29 +31,37 @@ function setup()
 function draw() 
 {
   background(220);
-  numbers[0] = b0.ButtonDo(mouseClick)
-  numbers[1] = b1.ButtonDo(mouseClick)
-  numbers[2] = b2.ButtonDo(mouseClick)
-  numbers[3] = b3.ButtonDo(mouseClick)
-  numbers[4] = b4.ButtonDo(mouseClick)
-  numbers[5] = b5.ButtonDo(mouseClick)
-  numbers[6] = b6.ButtonDo(mouseClick)
-  numbers[7] = b7.ButtonDo(mouseClick)
-  numbers[8] = b8.ButtonDo(mouseClick)
-  numbers[9] = b9.ButtonDo(mouseClick)
+  b0.ButtonDo(mouseClick);
+  b1.ButtonDo(mouseClick);
+  b2.ButtonDo(mouseClick);
+  b3.ButtonDo(mouseClick);
+  b4.ButtonDo(mouseClick);
+  b5.ButtonDo(mouseClick);
+  b6.ButtonDo(mouseClick);
+  b7.ButtonDo(mouseClick);
+  b8.ButtonDo(mouseClick);
+  b9.ButtonDo(mouseClick);
+  
+  //vi laver et varibale til at display num til bruger
+  //Hver gang vi trykker på en knap, så indsætter vi det input i et array
+  //vi indsætter nu tallene i variabel med for-loop
 
-  console.log(numbers)
-  
-  
-  
-  
-  mouseClick = false
+  displayNum = ""
+  for (let i = 0; i < displayNumArray.length; i++)
+  {
+    displayNum += displayNumArray[i]; //indsæt ud fra rækkefølge
+  }
+  wholeNum = parseInt(displayNum); //vi har en seperat variabel som vi kan bruge til udregning
+  text(wholeNum, 200, 400); //display tal for bruger
+
+  console.log(wholeNum);
+  mouseClick = false;
 }
 
 
 function mousePressed()
 {
-  console.log("click");
+  // console.log("click");
   mouseClick = true;
 }
 

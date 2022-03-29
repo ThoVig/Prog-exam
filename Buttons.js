@@ -9,11 +9,14 @@ class Buttons
         this.input = input;
         
         this.buttonClicked;
+        
         this.r = r;
         this.g = g;
         this.b = b;
 
-        this.bright = 1;
+        this.bright = 1; //ændre farve af knap på hover
+
+        this.flag = false; //bool så knap kun trykkes en gang
     }
 
     
@@ -25,6 +28,7 @@ class Buttons
         textAlign(CENTER);
         fill(this.r * this.bright, this.g * this.bright, this.b * this.bright);
         
+        //lav knap mere moderne med at gøre kanterne mere runde
         this.roundEdge = this.width/4;
         rect(this.posX, this.posY, this.width, this.height, this.roundEdge);
 
@@ -46,9 +50,17 @@ class Buttons
                 if(this.mouseClick) //tjek hvis den trykker
                 {
                     this.buttonClicked = true;
+                    this.flag = true; 
+
                     console.log("button pressed" + " " + "\"" + this.input + "\"");
+                    displayNumArray.push(parseInt(this.input)); //array med tal som vi har trykket på
                 } 
             }  
+            else
+            {
+                this.buttonClicked = false;
+                this.bright = 1;
+            }
         }
         else
         {
@@ -56,13 +68,25 @@ class Buttons
             this.bright = 1;
         }
 
-        if(this.buttonClicked)  //return input (nkap nummer)
-        {
-            return parseInt(this.input);
-        }
+        // if(this.buttonClicked || this.flag)  //return input (knap nummer)
+        // {
+        //     return parseInt(this.input);
+        // }
 
+        return this.buttonClicked;
+    }
+}
 
+class operation extends Buttons//pemdas buttons make
+{
+    constructor(posX, posY, width, height, input, r, g, b)
+    {
+        super(posX, posY, width, height, input, r, g, b)
     }
 
+    opperationButtons()
+    {
+
+    }
 
 }
