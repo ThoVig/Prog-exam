@@ -3,29 +3,49 @@
 // https://stackoverflow.com/questions/61757326/making-a-calculator-function-properly-in-p5-js
 var mouseClick = false;
 
-
 var displayNumArray = [];  //gloab array er nødvendig for at få tal fra flere objecter
 var operation;
 
 var displayNum = "";
 var wholeNum;
 
+var displayOp = "";
+var operatorType = "";
+var operatorNumber;
+
+
+const buttonWidth = 100;
+const buttonHeight = 80;
+const buttonStartY = 520;
 
 function setup() 
 {
   createCanvas(400, 600);
 
-  b0 = new Buttons(50, 50, 20, 20, "0", 255, 255, 255)
-  b1 = new Buttons(80, 50, 20, 20, "1", 255, 255, 255)
-  b2 = new Buttons(110, 50, 20, 20, "2", 255, 255, 255)
-  b3 = new Buttons(140, 50, 20, 20, "3", 255, 255, 255)
-  b4 = new Buttons(170, 50, 20, 20, "4", 255, 255, 255)
-  b5 = new Buttons(200, 50, 20, 20, "5", 255, 255, 255)
-  b6 = new Buttons(230, 50, 20, 20, "6", 255, 255, 255)
-  b7 = new Buttons(260, 50, 20, 20, "7", 255, 255, 255)
-  b8 = new Buttons(290, 50, 20, 20, "8", 255, 255, 255)
-  b9 = new Buttons(320, 50, 20, 20, "9", 255, 255, 255)
+  b0 = new Buttons((buttonWidth/2)                  , buttonStartY+(buttonHeight/2)     , buttonWidth, buttonHeight, "0", 255, 255, 255)
+  b1 = new Buttons((buttonWidth/2)                  , buttonStartY-(buttonHeight/2)     , buttonWidth, buttonHeight, "1", 255, 255, 255)
+  b2 = new Buttons((buttonWidth/2)*2+(buttonWidth/2), buttonStartY-(buttonHeight/2)     , buttonWidth, buttonHeight, "2", 255, 255, 255)
+  b3 = new Buttons((buttonWidth/2)*3+buttonWidth    , buttonStartY-(buttonHeight/2)     , buttonWidth, buttonHeight, "3", 255, 255, 255)
+  b4 = new Buttons((buttonWidth/2)                  , buttonStartY-((buttonHeight/2)*3) , buttonWidth, buttonHeight, "4", 255, 255, 255)
+  b5 = new Buttons((buttonWidth/2)*2+(buttonWidth/2), buttonStartY-((buttonHeight/2)*3) , buttonWidth, buttonHeight, "5", 255, 255, 255)
+  b6 = new Buttons((buttonWidth/2)*3+buttonWidth    , buttonStartY-((buttonHeight/2)*3) , buttonWidth, buttonHeight, "6", 255, 255, 255)
+  b7 = new Buttons((buttonWidth/2)                  , buttonStartY-((buttonHeight/2)*5) , buttonWidth, buttonHeight, "7", 255, 255, 255)
+  b8 = new Buttons((buttonWidth/2)*2+(buttonWidth/2), buttonStartY-((buttonHeight/2)*5) , buttonWidth, buttonHeight, "8", 255, 255, 255)
+  b9 = new Buttons((buttonWidth/2)*3+buttonWidth    , buttonStartY-((buttonHeight/2)*5) , buttonWidth, buttonHeight, "9", 255, 255, 255)
 
+  // +
+  o1 = new Operators((buttonWidth/2)*3+buttonWidth*2, buttonStartY+(buttonHeight/2)     , buttonWidth, buttonHeight, "+", 255, 255, 255)
+  // -
+  o2 = new Operators((buttonWidth/2)*3+buttonWidth*2, buttonStartY-(buttonHeight/2)     , buttonWidth, buttonHeight, "-", 255, 255, 255)
+  // *
+  o3 = new Operators((buttonWidth/2)*3+buttonWidth*2, buttonStartY-((buttonHeight/2)*3) , buttonWidth, buttonHeight, "×", 255, 255, 255)
+  
+  o4 = new Operators((buttonWidth/2)*3+buttonWidth*2, buttonStartY-((buttonHeight/2)*5) , buttonWidth, buttonHeight, "÷", 255, 255, 255)
+
+  // clear
+  oAC = new Operators
+  // =
+  o9 = new Operators((buttonWidth/2)*3+buttonWidth    , buttonStartY+(buttonHeight/2)     , buttonWidth, buttonHeight, "=", 255, 255, 255)
 }
 
 function draw() 
@@ -51,10 +71,36 @@ function draw()
   {
     displayNum += displayNumArray[i]; //indsæt ud fra rækkefølge
   }
-  wholeNum = parseInt(displayNum); //vi har en seperat variabel som vi kan bruge til udregning
-  text(wholeNum, 200, 400); //display tal for bruger
+  wholeNum = parseInt(displayNum); //vi har en seperat variabel som vi kan bruge til udregning (display num er kun til at vise tallet)
+  
+  if(!isNaN(wholeNum))
+  {
+    text(displayNum + displayOp, 200, 100); //display tal for bruger
 
-  console.log(wholeNum);
+  }
+
+  
+
+
+  if(!isNaN(operatorNumber))  //kun display tal hvis de ikke er NaN
+  {  
+    text(operatorNumber,200, 180)
+
+    text(operatorType, 20, 180)
+  }
+
+
+  o1.OperatorDo(mouseClick);
+  o2.OperatorDo(mouseClick);
+  o3.OperatorDo(mouseClick);
+  o4.OperatorDo(mouseClick);
+
+  o9.Equals(mouseClick);
+
+  console.log(operatorType);
+  
+  console.log("wholeNum", wholeNum);
+  console.log(operatorNumber);
   mouseClick = false;
 }
 
