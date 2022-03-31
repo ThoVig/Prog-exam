@@ -2,6 +2,7 @@
 // https://stackoverflow.com/questions/61747298/make-a-calculator-in-p5
 // https://stackoverflow.com/questions/61757326/making-a-calculator-function-properly-in-p5-js
 var mouseClick = false;
+//testtettetsetetswfajdiaeofjeaijfeaiojdiaojdioajd
 
 var displayNumArray = [];  //gloab array er nødvendig for at få tal fra flere objecter
 var operation;
