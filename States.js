@@ -82,6 +82,7 @@ class StateMenu
         this.g = g;
         this.b = b;
         
+        //lav knap(per)
         this.buttonCurrency = new StateButtons(this.posX * 5, (this.posY * 5) * 3, this.width * 5, this.height * 5, "Currency", this.r, this.g, this.b)
         
         this.bright = 1;
@@ -101,32 +102,33 @@ class StateMenu
             
         this.buttonPress()
         
-        if(this.press && this.state != 0)
+        if(this.press && this.state != 0)   //ændre state til menu
         {
             this.state = 0;
             this.press = false;
         }
         
-        if(this.press && this.state == 0)
+        if(this.press && this.state == 0)   //ændre state til lommeregner
         {
             this.state = 1;
             this.press = false;
         }
         
-        if(this.state > 0)
+        if(this.state > 0)  //hvis menu knap
         {
             this.textSize = 10;
             this.text = "menu";
             this.resize = 1;
         }
         
-        if(this.state == 0)
+        if(this.state == 0) //hvis menu
         {
             background(120,255,255)
             this.textSize = 50;
             this.resize = 5;
             this.text = "Calculator";
-            this.button = this.buttonCurrency.ButtonDo(this.mouseClick)
+            //lav extra knap(per) i menu
+            this.button = this.buttonCurrency.ButtonDo(this.mouseClick) 
             if(this.button)
             {
                 this.state = 2;
@@ -143,13 +145,12 @@ class StateMenu
         textSize(this.textSize);
         text(this.text, this.posX * this.resize, this.posY * this.resize + 2)
         
-        
         textSize(60);
         return this.state;
     }
 
 
-    buttonPress()
+    buttonPress()   //funktion til state switch knap
     {
         if(mouseX > this.posX * this.resize - this.width * this.resize/2 && mouseX < this.posX * this.resize + this.width * this.resize/2)
         {
@@ -172,8 +173,4 @@ class StateMenu
             this.bright = 1;
         }
     }
-
-
-
-
 }
