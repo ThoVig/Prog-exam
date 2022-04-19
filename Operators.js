@@ -137,7 +137,7 @@ class Operators extends Buttons
 
         //text
         fill(0)
-        text(this.input, this.posX, this.posY + 2)
+        text(this.input, this.posX, this.posY + 20)
 
         //farve button
         this.stroke = 1;
@@ -152,7 +152,9 @@ class Operators extends Buttons
                 
                 if(this.mouseClick) //tjek hvis den trykker
                 {
-
+                    displayNumArray = [];
+                    operatorNumber = undefined;
+                    operatorType = undefined;
                 } 
             }  
             else

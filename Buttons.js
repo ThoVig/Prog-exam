@@ -52,7 +52,7 @@ class Buttons
                     this.buttonClicked = true;
 
                     console.log("button pressed" + " " + "\"" + this.input + "\"");
-                    displayNumArray.push(parseInt(this.input)); //array med tal som vi har trykket på
+                    displayNumArray.push(this.input); //array med tal som vi har trykket på
                 } 
             }  
             else

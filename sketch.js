@@ -4,12 +4,10 @@
 var mouseClick = false;
 
 var displayNumArray = [];  //gloab array er nødvendig for at få tal fra flere objecter
-var operation;
 
 var displayNum = "";
 var wholeNum;
 
-var displayOp = "";
 var operatorType = "";
 var operatorNumber;
 
@@ -22,6 +20,7 @@ function setup()
 {
   createCanvas(400, 600);
 
+  bDot = new Buttons((buttonWidth/2)*2+(buttonWidth/2), buttonStartY+(buttonHeight/2)     , buttonWidth, buttonHeight, ".", 255, 255, 255)
   b0 = new Buttons((buttonWidth/2)                  , buttonStartY+(buttonHeight/2)     , buttonWidth, buttonHeight, "0", 255, 255, 255)
   b1 = new Buttons((buttonWidth/2)                  , buttonStartY-(buttonHeight/2)     , buttonWidth, buttonHeight, "1", 255, 255, 255)
   b2 = new Buttons((buttonWidth/2)*2+(buttonWidth/2), buttonStartY-(buttonHeight/2)     , buttonWidth, buttonHeight, "2", 255, 255, 255)
@@ -43,7 +42,7 @@ function setup()
   o4 = new Operators((buttonWidth/2)*3+buttonWidth*2, buttonStartY-((buttonHeight/2)*5) , buttonWidth, buttonHeight, "÷", 255, 255, 255)
 
   // clear
-  oAC = new Operators
+  oAC = new Operators((buttonWidth/2)*3+buttonWidth*2, buttonStartY-((buttonHeight/2)*7) , buttonWidth, buttonHeight, "AC", 255, 255, 255)
   // =
   o9 = new Operators((buttonWidth/2)*3+buttonWidth    , buttonStartY+(buttonHeight/2)     , buttonWidth, buttonHeight, "=", 255, 255, 255)
 }
@@ -61,6 +60,16 @@ function draw()
   b7.ButtonDo(mouseClick);
   b8.ButtonDo(mouseClick);
   b9.ButtonDo(mouseClick);
+  bDot.ButtonDo(mouseClick);
+
+  o1.OperatorDo(mouseClick);
+  o2.OperatorDo(mouseClick);
+  o3.OperatorDo(mouseClick);
+  o4.OperatorDo(mouseClick);
+  o9.Equals(mouseClick);
+  oAC.ClearKnap(mouseClick);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////
   
   //vi laver et varibale til at display num til bruger
   //Hver gang vi trykker på en knap, så indsætter vi det input i et array
@@ -73,34 +82,35 @@ function draw()
   }
   wholeNum = parseFloat(displayNum); //vi har en seperat variabel som vi kan bruge til udregning (display num er kun til at vise tallet)
   
-  if(!isNaN(wholeNum))
+  if(!isNaN(wholeNum)) //display tal for bruger
   {
-    text(displayNum + displayOp, 200, 100); //display tal for bruger
-
+    if(displayNum.endsWith("."))  //display "." korekt
+    {
+      text(displayNum, 200, 100);
+    }
+    else
+    {
+      text(round(displayNum,6), 200, 100);
+    }
   }
-
-  
 
 
   if(!isNaN(operatorNumber))  //kun display tal hvis de ikke er NaN
   {  
-    text(operatorNumber,200, 180)
+    text(round(operatorNumber,6),200, 180)
 
     text(operatorType, 20, 180)
   }
 
+ 
 
-  o1.OperatorDo(mouseClick);
-  o2.OperatorDo(mouseClick);
-  o3.OperatorDo(mouseClick);
-  o4.OperatorDo(mouseClick);
 
-  o9.Equals(mouseClick);
-
-  console.log(operatorType);
+  console.log("type", operatorType);
   
+  console.log("displayNum", displayNum);
+
   console.log("wholeNum", wholeNum);
-  console.log(operatorNumber);
+  console.log("opNum", operatorNumber);
   mouseClick = false;
 }
 
