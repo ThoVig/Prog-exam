@@ -11,6 +11,7 @@ var wholeNum;
 var operatorType = "";
 var operatorNumber;
 
+var state;
 
 const buttonWidth = 100;
 const buttonHeight = 80;
@@ -45,82 +46,32 @@ function setup()
   oAC = new Operators((buttonWidth/2)*3+buttonWidth*2, buttonStartY-((buttonHeight/2)*7) , buttonWidth, buttonHeight, "AC", 255, 255, 255)
   // =
   o9 = new Operators((buttonWidth/2)*3+buttonWidth    , buttonStartY+(buttonHeight/2)     , buttonWidth, buttonHeight, "=", 255, 255, 255)
+
+
+  menu = new StateMenu(25, 10, 50 ,20 ,255 ,255 ,255)
 }
 
 function draw() 
 {
   background(220);
-  b0.ButtonDo(mouseClick);
-  b1.ButtonDo(mouseClick);
-  b2.ButtonDo(mouseClick);
-  b3.ButtonDo(mouseClick);
-  b4.ButtonDo(mouseClick);
-  b5.ButtonDo(mouseClick);
-  b6.ButtonDo(mouseClick);
-  b7.ButtonDo(mouseClick);
-  b8.ButtonDo(mouseClick);
-  b9.ButtonDo(mouseClick);
-  bDot.ButtonDo(mouseClick);
 
-  o1.OperatorDo(mouseClick);
-  o2.OperatorDo(mouseClick);
-  o3.OperatorDo(mouseClick);
-  o4.OperatorDo(mouseClick);
-  o9.Equals(mouseClick);
-  oAC.ClearKnap(mouseClick);
-
-  //////////////////////////////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////
+  state = menu.Menu(mouseClick);
   
-  //vi laver et varibale til at display num til bruger
-  //Hver gang vi trykker på en knap, så indsætter vi det input i et array
-  //vi indsætter nu tallene i variabel med for-loop
-
-  displayNum = ""
-  for (let i = 0; i < displayNumArray.length; i++)
+  if(state == 1) //vis lommeregner
   {
-    displayNum += displayNumArray[i]; //indsæt ud fra rækkefølge
+    mainCalc();
   }
-  wholeNum = parseFloat(displayNum); //vi har en seperat variabel som vi kan bruge til udregning (display num er kun til at vise tallet)
   
-  if(!isNaN(wholeNum)) //display tal for bruger
-  {
-    if(displayNum.endsWith("."))  //display "." korekt
-    {
-      text(displayNum, 200, 100);
-    }
-    else
-    {
-      text(round(displayNum,6), 200, 100);
-    }
-  }
+  console.log(state);
 
-
-  if(!isNaN(operatorNumber))  //kun display tal hvis de ikke er NaN
-  {  
-    text(round(operatorNumber,6),200, 180)
-
-    text(operatorType, 20, 180)
-  }
-
- 
-
-
-  console.log("type", operatorType);
-  
-  console.log("displayNum", displayNum);
-
-  console.log("wholeNum", wholeNum);
-  console.log("opNum", operatorNumber);
   mouseClick = false;
 }
-
 
 function mousePressed()
 {
   // console.log("click");
   mouseClick = true;
 }
-
 
 function mousePos()
 {

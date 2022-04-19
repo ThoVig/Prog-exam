@@ -44,13 +44,11 @@ class Operators extends Buttons
             }  
             else
             {
-                this.buttonClicked = false;
                 this.bright = 1;
             }
         }
         else
         {
-            this.buttonClicked = false;
             this.bright = 1;
         }
 
@@ -106,18 +104,16 @@ class Operators extends Buttons
                         displayNumArray = [operatorNumber / wholeNum]
                     }
                     operatorNumber = undefined;
-                    operatorType = undefined;
+                    operatorType = "";
                 } 
             }  
             else
             {
-                this.buttonClicked = false;
                 this.bright = 1;
             }
         }
         else
         {
-            this.buttonClicked = false;
             this.bright = 1;
         }
 
@@ -152,20 +148,19 @@ class Operators extends Buttons
                 
                 if(this.mouseClick) //tjek hvis den trykker
                 {
+                    //reset alt
                     displayNumArray = [];
                     operatorNumber = undefined;
-                    operatorType = undefined;
+                    operatorType = "";
                 } 
             }  
             else
             {
-                this.buttonClicked = false;
                 this.bright = 1;
             }
         }
         else
         {
-            this.buttonClicked = false;
             this.bright = 1;
         }
 
