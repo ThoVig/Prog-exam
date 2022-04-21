@@ -1,13 +1,15 @@
 class Operators extends Buttons
 {
-    constructor(posX, posY, width, height, input, r, g, b)
+    constructor(posX, posY, width, height, input, r, g, b, edge)
     {
-        super(posX, posY, width, height, input, r, g, b)
+        super(posX, posY, width, height, input, r, g, b, edge)
         this.number;
     }
 
     OperatorDo(mouseClick)
     {
+        noStroke();
+
         this.mouseClick = mouseClick;
 
         rectMode(CENTER);
@@ -15,12 +17,13 @@ class Operators extends Buttons
         fill(this.r * this.bright, this.g * this.bright, this.b * this.bright);
         
         //lav knap mere moderne med at gøre kanterne mere runde
-        this.roundEdge = this.width/4;
+        this.roundEdge = this.width/this.edge;
         rect(this.posX, this.posY, this.width, this.height, this.roundEdge);
 
         //text
         fill(0)
-        text(this.input, this.posX, this.posY + 20)
+        this.offset = 12;
+        text(this.input, this.posX, this.posY + this.offset)
 
         //farve button
         this.stroke = 1;
@@ -63,12 +66,13 @@ class Operators extends Buttons
         fill(this.r * this.bright, this.g * this.bright, this.b * this.bright);
         
         //lav knap mere moderne med at gøre kanterne mere runde
-        this.roundEdge = this.width/4;
+        this.roundEdge = this.width/this.edge;
         rect(this.posX, this.posY, this.width, this.height, this.roundEdge);
 
         //text
         fill(0)
-        text(this.input, this.posX, this.posY + 20)
+        this.offset = 12;
+        text(this.input, this.posX, this.posY + this.offset)
 
         //farve button
         this.stroke = 1;
@@ -128,12 +132,13 @@ class Operators extends Buttons
         fill(this.r * this.bright, this.g * this.bright, this.b * this.bright);
         
         //lav knap mere moderne med at gøre kanterne mere runde
-        this.roundEdge = this.width/4;
+        this.roundEdge = this.width/this.edge;
         rect(this.posX, this.posY, this.width, this.height, this.roundEdge);
 
         //text
         fill(0)
-        text(this.input, this.posX, this.posY + 20)
+        this.offset = 12;
+        text(this.input, this.posX, this.posY + this.offset)
 
         //farve button
         this.stroke = 1;

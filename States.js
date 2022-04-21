@@ -1,5 +1,12 @@
 function mainCalc() //lommeregner
 {
+    // baggrund box
+    fill(152, 212, 42);
+    strokeWeight(12);
+    stroke(65);
+    rect(200, 120, 347, 150, 20);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
     b0.ButtonDo(mouseClick);
     b1.ButtonDo(mouseClick);
     b2.ButtonDo(mouseClick);
@@ -19,7 +26,7 @@ function mainCalc() //lommeregner
     o9.Equals(mouseClick);
     oAC.ClearKnap(mouseClick);
 
-    //////////////////////////////////////////////////////////////////////////////////////////////// ////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     //vi laver et varibale til at display num til bruger
     //Hver gang vi trykker på en knap, så indsætter vi det input i et array
@@ -48,13 +55,15 @@ function mainCalc() //lommeregner
     {  
         text(round(operatorNumber,6),200, 180)
 
-        text(operatorType, 40, 180)
+        text(operatorType, 43, 180)
     }
     
-    //error besked
+    //resets når der sker fejl
     if((displayNum == "" && isNaN(wholeNum) && isNaN(operatorNumber) && operatorType != "") || (isNaN(displayNum)) && isNaN(wholeNum) && operatorNumber == undefined && operatorType == "")
     {
-        text("error\nplease clear", 200, 100);
+        displayNumArray = [];
+        operatorNumber = undefined;
+        operatorType = "";
     }
 
     // console.log("type", operatorType);
@@ -82,9 +91,10 @@ class StateMenu
         this.g = g;
         this.b = b;
         
-        //lav knap(per)
+        //lav knapper
         this.buttonCurrency = new StateButtons(this.posX * 5, (this.posY * 5) * 3, this.width * 5, this.height * 5, "Currency", this.r, this.g, this.b)
-        
+        this.binaryConverter = new StateButtons(this.posX * 5, (this.posY * 5) * 5, this.width * 5, this.height * 5, "Binary\nConverter", this.r, this.g, this.b)
+
         this.bright = 1;
         this.state = 1;
 
@@ -128,11 +138,18 @@ class StateMenu
             this.resize = 5;
             this.text = "Calculator";
             //lav extra knap(per) i menu
-            this.button = this.buttonCurrency.ButtonDo(this.mouseClick) 
+            this.button = this.buttonCurrency.ButtonDo(this.mouseClick)
             if(this.button)
             {
                 this.state = 2;
             }
+
+            this.button = this.binaryConverter.ButtonDo(this.mouseClick)
+            if(this.button)
+            {
+                this.state = 3;
+            }
+
         }
 
         fill(this.r * this.bright, this.g * this.bright, this.b * this.bright);
@@ -145,7 +162,6 @@ class StateMenu
         textSize(this.textSize);
         text(this.text, this.posX * this.resize, this.posY * this.resize + 2)
         
-        textSize(60);
         return this.state;
     }
 
