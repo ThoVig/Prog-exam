@@ -97,7 +97,7 @@ function ValutaConv()
         sel.selected("vælg");
         /////////////////knap///////////////////////////
         button = createButton('Bekræft');
-        button.position(textX_vælg + 140, textY_vælg - 12.5);
+        button.position(textX_vælg + 140, textY_input + 10);
         button.mousePressed(mySelectEvent);
     }
     var textX_res = 125;
